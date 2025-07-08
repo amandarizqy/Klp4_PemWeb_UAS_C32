@@ -20,7 +20,7 @@
     </div>
     <input type="hidden" name="tipe" value="Pendapatan">
     <button type="submit" class="btn btn-success w-100">Simpan Kategori</button>
-    <a href="Kategori.html" class="btn btn-secondary w-100 mt-2">Kembali</a>
+    <a href="Kategori.php" class="btn btn-secondary w-100 mt-2">Kembali</a>
   </form>
 </div>
 

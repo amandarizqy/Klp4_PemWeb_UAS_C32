@@ -14,10 +14,10 @@
 
 <nav>
     <ul>
-        <li><a href="Catatan.html" class="aktif">Catatan</a></li>
-        <li><a href="Tambah.html">Tambah</a></li>
-        <li><a href="Kategori.html">Kategori</a></li>
-        <li><a href="Aset.html">Aset</a></li>
+        <li><a href="Catatan.php" class="aktif">Catatan</a></li>
+        <li><a href="Tambah.php">Tambah</a></li>
+        <li><a href="Kategori.php">Kategori</a></li>
+        <li><a href="Aset.php">Aset</a></li>
     </ul>
 </nav>
 
