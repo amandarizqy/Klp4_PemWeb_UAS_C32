@@ -16,10 +16,10 @@
 
 <nav>
     <ul>
-        <li><a href="Catatan.html">Catatan</a></li>
-        <li><a href="Tambah.html">Tambah</a></li>
-        <li><a href="Kategori.html">Kategori</a></li>
-        <li><a href="Aset.html" class="aktif">Aset</a></li>
+        <li><a href="Catatan.php">Catatan</a></li>
+        <li><a href="Tambah.php">Tambah</a></li>
+        <li><a href="Kategori.php">Kategori</a></li>
+        <li><a href="Aset.php" class="aktif">Aset</a></li>
     </ul>
 </nav>
 
