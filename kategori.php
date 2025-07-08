@@ -42,8 +42,8 @@
 
 <div class="container centered-container">
   <div class="btn-group-custom text-center">
-    <a href="Kategori_Pendapatan.html" class="btn btn-success btn-lg">Kategori Pendapatan</a>
-    <a href="Kategori_Pengeluaran.html" class="btn btn-danger btn-lg">Kategori Pengeluaran</a>
+    <a href="Kategori_Pendapatan.php" class="btn btn-success btn-lg">Kategori Pendapatan</a>
+    <a href="Kategori_Pengeluaran.php" class="btn btn-danger btn-lg">Kategori Pengeluaran</a>
   </div>
 </div>
 

@@ -39,7 +39,7 @@
     </div>
 
     <button type="submit" class="btn btn-info text-white">Simpan Aset</button>
-    <a href="Aset.html" class="btn btn-secondary ms-2">Kembali</a>
+    <a href="Aset.php" class="btn btn-secondary ms-2">Kembali</a>
   </form>
 </div>
 

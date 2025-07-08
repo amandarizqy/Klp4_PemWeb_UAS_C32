@@ -32,7 +32,7 @@
       <textarea class="form-control" id="keterangan" rows="3"></textarea>
     </div>
     <button type="submit" class="btn btn-success">Simpan</button>
-    <a href="Tambah.html" class="btn btn-secondary">Kembali</a>
+    <a href="Tambah.php" class="btn btn-secondary">Kembali</a>
   </form>
 </div>
 
