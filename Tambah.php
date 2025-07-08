@@ -19,16 +19,16 @@
 <nav class="bg-dark">
     <ul class="nav justify-content-center">
         <li class="nav-item">
-            <a class="nav-link text-white" href="Catatan.html">Catatan</a>
+            <a class="nav-link text-white" href="Catatan.php">Catatan</a>
         </li>
         <li class="nav-item">
-            <a class="nav-link active text-white bg-secondary" href="Tambah.html">Tambah</a>
+            <a class="nav-link active text-white bg-secondary" href="Tambah.php">Tambah</a>
         </li>
         <li class="nav-item">
-            <a class="nav-link text-white" href="Kategori.html">Kategori</a>
+            <a class="nav-link text-white" href="Kategori.php">Kategori</a>
         </li>
         <li class="nav-item">
-            <a class="nav-link text-white" href="Aset.html">Aset</a>
+            <a class="nav-link text-white" href="Aset.php">Aset</a>
         </li>
     </ul>
 </nav>
