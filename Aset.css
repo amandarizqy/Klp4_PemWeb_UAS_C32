@@ -1,0 +1,16 @@
+@import url('UAS.css');
+
+.main-content h2 {
+    color: #2e7d32;
+    border-bottom: 2px solid #a5d6a7;
+    padding-bottom: 5px;
+}
+
+table {
+    background-color: #f1f8e9;
+}
+
+th {
+    background-color: #c8e6c9;
+    color: #1b5e20;
+}
