@@ -52,8 +52,8 @@
 <!-- TOMBOL DI TENGAH -->
 <div class="container centered-container">
     <div class="btn-group-custom text-center">
-        <a href="Pendapatan.html" class="btn btn-success btn-lg">Pendapatan</a>
-        <a href="Pengeluaran.html" class="btn btn-danger btn-lg">Pengeluaran</a>
+        <a href="Pendapatan.php" class="btn btn-success btn-lg">Pendapatan</a>
+        <a href="Pengeluaran.php" class="btn btn-danger btn-lg">Pengeluaran</a>
         <a href="Transfer.php" class="btn btn-warning btn-lg text-white">Transfer</a>
     </div>
 </div>
