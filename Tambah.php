@@ -7,24 +7,8 @@
 
     <!-- Bootstrap 5.3 CDN -->
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet">
-    <link rel="stylesheet" href="catatan.css">
-    <style>
-        /* Tambahan custom untuk membuat tombol di tengah layar */
-        .centered-container {
-            min-height: 80vh;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-        }
+    <link rel="stylesheet" href="UAS.css">
 
-        .btn-group-custom {
-            display: flex;
-            flex-direction: column;
-            gap: 20px;
-            width: 100%;
-            max-width: 300px;
-        }
-    </style>
 </head>
 <body>
 

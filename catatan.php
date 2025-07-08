@@ -4,7 +4,7 @@
 <head>
     <meta charset="UTF-8">
     <title>Catatan Keuangan</title>
-    <link rel="stylesheet" href="catatan.css">
+    <link rel="stylesheet" href="UAS.css">
 </head>
 <body>
 
