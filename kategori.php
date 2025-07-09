@@ -33,10 +33,10 @@
 
 <nav class="bg-dark">
   <ul class="nav justify-content-center">
-    <li class="nav-item"><a href="Catatan.html" class="nav-link text-white">Catatan</a></li>
-    <li class="nav-item"><a href="Tambah.html" class="nav-link text-white">Tambah</a></li>
-    <li class="nav-item"><a href="Kategori.html" class="nav-link active text-white bg-secondary">Kategori</a></li>
-    <li class="nav-item"><a href="Aset.html" class="nav-link text-white">Aset</a></li>
+    <li class="nav-item"><a href="Catatan.php" class="nav-link text-white">Catatan</a></li>
+    <li class="nav-item"><a href="Tambah.php" class="nav-link text-white">Tambah</a></li>
+    <li class="nav-item"><a href="Kategori.php" class="nav-link active text-white bg-secondary">Kategori</a></li>
+    <li class="nav-item"><a href="Aset.php" class="nav-link text-white">Aset</a></li>
   </ul>
 </nav>
 
