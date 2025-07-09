@@ -4,7 +4,7 @@
 <head>
     <meta charset="UTF-8">
     <title>Data Aset</title>
-    <link rel="stylesheet" href="aset.css">
+    <link rel="stylesheet" href="UAS.css">
     <!-- Tambahkan Bootstrap agar tombol terlihat rapi -->
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet">
 </head>
