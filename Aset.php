@@ -39,7 +39,7 @@
 </div>
 
 <footer>
-    <p>&copy; Create by Nayla Putri Innayah</p>
+    <p>&copy; Created by Kelompok 4</p>
 </footer>
 
 </body>

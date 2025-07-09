@@ -48,7 +48,7 @@
 </div>
 
 <footer class="bg-primary text-white text-center py-3 mt-5">
-  <p>&copy; Create by Nayla Putri Innayah</p>
+  <p>&copy; Created by Kelompok 4</p>
 </footer>
 
 </body>
