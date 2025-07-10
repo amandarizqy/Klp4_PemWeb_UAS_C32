@@ -1,4 +1,19 @@
-<?php include 'database.php'; ?>
+<?php
+include 'database.php';
+
+if ($_SERVER["REQUEST_METHOD"] == "POST") {
+  $nama_kategori = $_POST['nama_kategori'];
+
+  $query = "INSERT INTO kategori_pengeluaran (nama_kategori) VALUES ('$nama_kategori')";
+
+  if (mysqli_query($conn, $query)) {
+    echo "<script>alert('Kategori pengeluaran berhasil disimpan!'); window.location='Kategori.php';</script>";
+  } else {
+    echo "Error: " . $query . "<br>" . mysqli_error($conn);
+  }
+}
+?>
+
 <!DOCTYPE html>
 <html lang="id">
 <head>
@@ -13,10 +28,10 @@
 </header>
 
 <div class="container my-5">
-  <form class="mx-auto" style="max-width: 400px;">
+  <form method="POST" action="" class="mx-auto" style="max-width: 400px;">
     <div class="mb-3">
       <label for="namaKategori" class="form-label">Nama Kategori</label>
-      <input type="text" class="form-control" id="namaKategori" placeholder="Contoh: Makan, Transportasi" required>
+      <input type="text" class="form-control" id="namaKategori" name="nama_kategori" placeholder="Contoh: Makan, Transportasi" required>
     </div>
     <input type="hidden" name="tipe" value="Pengeluaran">
     <button type="submit" class="btn btn-danger w-100">Simpan Kategori</button>
