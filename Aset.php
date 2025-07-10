@@ -5,7 +5,6 @@
     <meta charset="UTF-8">
     <title>Data Aset</title>
     <link rel="stylesheet" href="UAS.css">
-    <!-- Tambahkan Bootstrap agar tombol terlihat rapi -->
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet">
 </head>
 <body>
@@ -23,13 +22,43 @@
     </ul>
 </nav>
 
-<div class="container">
-    
+<div class="container mt-4">
     <section class="main-content">
-        <!-- Tombol sudah diubah jadi tombol Bootstrap -->
-        <a href="TambahAset.html" class="btn btn-primary mb-3">Tambah Aset</a>
-
+        <a href="TambahAset.php" class="btn btn-primary mb-3">Tambah Aset</a>
         <h2>Daftar Aset Kamu</h2>
+
+        <div class="table-responsive">
+            <table class="table table-bordered table-striped">
+                <thead class="table-dark">
+                    <tr>
+                        <th>No</th>
+                        <th>Nama Aset</th>
+                        <th>Saldo</th>
+                        <th>Keterangan</th>
+                    </tr>
+                </thead>
+                <tbody>
+                <?php
+                $query = "SELECT * FROM aset";
+                $result = mysqli_query($conn, $query);
+                $no = 1;
+
+                if (mysqli_num_rows($result) > 0) {
+                    while ($row = mysqli_fetch_assoc($result)) {
+                        echo "<tr>
+                                <td>" . $no++ . "</td>
+                                <td>" . htmlspecialchars($row['nama_aset']) . "</td>
+                                <td>Rp " . number_format($row['saldo'], 0, ',', '.') . "</td>
+                                <td>" . htmlspecialchars($row['keterangan']) . "</td>
+                              </tr>";
+                    }
+                } else {
+                    echo "<tr><td colspan='4' class='text-center'>Belum ada data aset.</td></tr>";
+                }
+                ?>
+                </tbody>
+            </table>
+        </div>
     </section>
 
     <aside class="sidebar">
@@ -38,7 +67,7 @@
     </aside>
 </div>
 
-<footer>
+<footer class="mt-5">
     <p>&copy; Created by Kelompok 4</p>
 </footer>
 

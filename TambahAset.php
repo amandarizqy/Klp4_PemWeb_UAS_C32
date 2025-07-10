@@ -1,4 +1,21 @@
-<?php include 'database.php'; ?>
+<?php
+include 'database.php';
+
+if ($_SERVER["REQUEST_METHOD"] == "POST") {
+  $nama_aset = $_POST['nama_aset'];
+  $saldo = $_POST['saldo'];
+  $keterangan = $_POST['keterangan'];
+
+  $query = "INSERT INTO aset (nama_aset, saldo, keterangan) VALUES ('$nama_aset', '$saldo', '$keterangan')";
+
+  if (mysqli_query($conn, $query)) {
+    echo "<script>alert('Aset berhasil disimpan!'); window.location='Aset.php';</script>";
+  } else {
+    echo "Error: " . $query . "<br>" . mysqli_error($conn);
+  }
+}
+?>
+
 <!DOCTYPE html>
 <html lang="id">
 <head>
@@ -22,20 +39,20 @@
 </nav>
 
 <div class="container my-5">
-  <form class="mx-auto" style="max-width: 500px;">
+  <form method="POST" action="" class="mx-auto" style="max-width: 500px;">
     <div class="mb-3">
       <label for="namaAset" class="form-label">Nama Aset</label>
-      <input type="text" class="form-control" id="namaAset" placeholder="Contoh: Dompet, Rekening" required>
+      <input type="text" class="form-control" id="namaAset" name="nama_aset" placeholder="Contoh: Dompet, Rekening" required>
     </div>
 
     <div class="mb-3">
       <label for="saldoAset" class="form-label">Saldo Awal (Rp)</label>
-      <input type="number" class="form-control" id="saldoAset" placeholder="Contoh: 1000000" required>
+      <input type="number" class="form-control" id="saldoAset" name="saldo" placeholder="Contoh: 1000000" required>
     </div>
 
     <div class="mb-3">
       <label for="keterangan" class="form-label">Keterangan</label>
-      <textarea class="form-control" id="keterangan" rows="3" placeholder="Contoh: Uang tunai di dompet, rekening utama, dll"></textarea>
+      <textarea class="form-control" id="keterangan" name="keterangan" rows="3" placeholder="Contoh: Uang tunai di dompet, rekening utama, dll"></textarea>
     </div>
 
     <button type="submit" class="btn btn-info text-white">Simpan Aset</button>
