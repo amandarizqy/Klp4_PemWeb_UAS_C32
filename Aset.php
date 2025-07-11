@@ -4,72 +4,96 @@
 <head>
     <meta charset="UTF-8">
     <title>Data Aset</title>
-    <link rel="stylesheet" href="UAS.css">
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet">
+    <style>
+        .nav-link.active {
+            font-weight: bold;
+            color: #0d6efd !important;
+        }
+        .aside-box {
+            background-color: #eaf4ff;
+            border-radius: 10px;
+            padding: 20px;
+        }
+    </style>
 </head>
-<body>
+<body class="bg-light">
 
-<header>
-    <h1>Data Aset</h1>
-</header>
-
-<nav>
-    <ul>
-        <li><a href="Catatan.php">Catatan</a></li>
-        <li><a href="Tambah.php">Tambah</a></li>
-        <li><a href="Kategori.php">Kategori</a></li>
-        <li><a href="Aset.php" class="aktif">Aset</a></li>
-    </ul>
+<!-- NAVBAR -->
+<nav class="navbar navbar-expand-lg navbar-light bg-white shadow-sm">
+    <div class="container">
+        <a class="navbar-brand fw-bold" href="#">Manajemen</a>
+        <div class="collapse navbar-collapse">
+            <ul class="navbar-nav ms-auto">
+                <li class="nav-item"><a class="nav-link" href="Catatan.php">Catatan</a></li>
+                <li class="nav-item"><a class="nav-link" href="Tambah.php">Tambah</a></li>
+                <li class="nav-item"><a class="nav-link" href="Kategori.php">Kategori</a></li>
+                <li class="nav-item"><a class="nav-link active" href="Aset.php">Aset</a></li>
+            </ul>
+        </div>
+    </div>
 </nav>
 
-<div class="container mt-4">
-    <section class="main-content">
-        <a href="TambahAset.php" class="btn btn-primary mb-3">Tambah Aset</a>
-        <h2>Daftar Aset Kamu</h2>
+<!-- HEADER -->
+<div class="container my-5">
+    <div class="d-flex justify-content-between align-items-center mb-3">
+        <h2>Data Aset</h2>
+        <a href="TambahAset.php" class="btn btn-primary">+ Tambah Aset</a>
+    </div>
 
-        <div class="table-responsive">
-            <table class="table table-bordered table-striped">
-                <thead class="table-dark">
-                    <tr>
-                        <th>No</th>
-                        <th>Nama Aset</th>
-                        <th>Saldo</th>
-                        <th>Keterangan</th>
-                    </tr>
-                </thead>
-                <tbody>
-                <?php
-                $query = "SELECT * FROM aset";
-                $result = mysqli_query($conn, $query);
-                $no = 1;
+    <div class="row">
+        <!-- TABEL -->
+        <div class="col-lg-8 mb-4">
+            <div class="table-responsive shadow-sm bg-white p-3 rounded">
+                <table class="table table-striped table-bordered">
+                    <thead class="table-dark">
+                        <tr>
+                            <th>No</th>
+                            <th>Nama Aset</th>
+                            <th>Saldo</th>
+                            <th>Keterangan</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <?php
+                        $query = "SELECT * FROM aset";
+                        $result = mysqli_query($conn, $query);
+                        $no = 1;
 
-                if (mysqli_num_rows($result) > 0) {
-                    while ($row = mysqli_fetch_assoc($result)) {
-                        echo "<tr>
-                                <td>" . $no++ . "</td>
-                                <td>" . htmlspecialchars($row['nama_aset']) . "</td>
-                                <td>Rp " . number_format($row['saldo'], 0, ',', '.') . "</td>
-                                <td>" . htmlspecialchars($row['keterangan']) . "</td>
-                              </tr>";
-                    }
-                } else {
-                    echo "<tr><td colspan='4' class='text-center'>Belum ada data aset.</td></tr>";
-                }
-                ?>
-                </tbody>
-            </table>
+                        if (mysqli_num_rows($result) > 0) {
+                            while ($row = mysqli_fetch_assoc($result)) {
+                                echo "<tr>
+                                    <td>{$no}</td>
+                                    <td>" . htmlspecialchars($row['nama_aset']) . "</td>
+                                    <td>Rp " . number_format($row['saldo'], 0, ',', '.') . "</td>
+                                    <td>" . htmlspecialchars($row['keterangan']) . "</td>
+                                </tr>";
+                                $no++;
+                            }
+                        } else {
+                            echo "<tr><td colspan='4' class='text-center'>Belum ada data aset.</td></tr>";
+                        }
+                        ?>
+                    </tbody>
+                </table>
+            </div>
         </div>
-    </section>
 
-    <aside class="sidebar">
-        <h3>Penting</h3>
-        <p>Jangan kebanyakan jajan ya!</p>
-    </aside>
+        <!-- SIDEBAR -->
+        <div class="col-lg-4">
+            <div class="aside-box shadow-sm">
+                <h5 class="fw-bold mb-2">💡 Penting</h5>
+                <p class="mb-0">Jangan kebanyakan jajan ya! Kelola asetmu dengan bijak 💰</p>
+            </div>
+        </div>
+    </div>
 </div>
 
-<footer class="mt-5">
-    <p>&copy; Created by Kelompok 4</p>
+<!-- FOOTER -->
+<footer class="bg-white text-center py-3 shadow-sm">
+    <p class="mb-0 text-muted">&copy; Created by Kelompok 4</p>
 </footer>
 
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
 </body>
 </html>
