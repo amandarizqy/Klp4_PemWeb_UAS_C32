@@ -5,50 +5,57 @@
     <meta charset="UTF-8">
     <title>Tambah Transaksi</title>
 
-    <!-- Bootstrap 5.3 CDN -->
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet">
-    <link rel="stylesheet" href="UAS.css">
-
+    <style>
+        .nav-link.active {
+            font-weight: bold;
+            color: #0d6efd !important;
+        }
+        .btn-group-custom {
+            display: flex;
+            justify-content: center;
+            gap: 20px;
+            margin-top: 50px;
+        }
+        footer {
+            margin-top: 100px;
+        }
+    </style>
 </head>
-<body>
+<body class="bg-light">
 
-<header class="bg-primary text-white text-center py-4">
-    <h1>Tambah Transaksi</h1>
-</header>
-
-<nav class="bg-dark">
-    <ul class="nav justify-content-center">
-        <li class="nav-item">
-            <a class="nav-link text-white" href="Catatan.php">Catatan</a>
-        </li>
-        <li class="nav-item">
-            <a class="nav-link active text-white bg-secondary" href="Tambah.php">Tambah</a>
-        </li>
-        <li class="nav-item">
-            <a class="nav-link text-white" href="Kategori.php">Kategori</a>
-        </li>
-        <li class="nav-item">
-            <a class="nav-link text-white" href="Aset.php">Aset</a>
-        </li>
-    </ul>
+<!-- NAVBAR -->
+<nav class="navbar navbar-expand-lg navbar-light bg-white shadow-sm">
+    <div class="container">
+        <a class="navbar-brand fw-bold" href="#">Manajemen</a>
+        <div class="collapse navbar-collapse">
+            <ul class="navbar-nav ms-auto">
+                <li class="nav-item"><a class="nav-link" href="Catatan.php">Catatan</a></li>
+                <li class="nav-item"><a class="nav-link active" href="Tambah.php">Tambah</a></li>
+                <li class="nav-item"><a class="nav-link" href="Kategori.php">Kategori</a></li>
+                <li class="nav-item"><a class="nav-link" href="Aset.php">Aset</a></li>
+            </ul>
+        </div>
+    </div>
 </nav>
 
-<!-- TOMBOL DI TENGAH -->
-<div class="container centered-container">
-    <div class="btn-group-custom text-center">
-        <a href="Pendapatan.php" class="btn btn-success btn-lg">Pendapatan</a>
-        <a href="Pengeluaran.php" class="btn btn-danger btn-lg">Pengeluaran</a>
-        <a href="Transfer.php" class="btn btn-warning btn-lg text-white">Transfer</a>
+<!-- BUTTON -->
+<div class="container my-5 text-center">
+    <h2 class="mb-4">Tambah Transaksi</h2>
+
+    <div class="d-grid gap-3 mx-auto" style="max-width: 300px;">
+        <a href="Pendapatan.php" class="btn btn-success btn-lg py-3">Pendapatan</a>
+        <a href="Pengeluaran.php" class="btn btn-danger btn-lg py-3">Pengeluaran</a>
+        <a href="Transfer.php" class="btn btn-warning btn-lg py-3 text-white">Transfer</a>
     </div>
 </div>
 
-<footer class="bg-primary text-white text-center py-3 mt-5">
-    <p>&copy; Created by Kelompok 4</p>
+
+<!-- FOOTER -->
+<footer class="bg-white text-center py-3 shadow-sm">
+    <p class="mb-0 text-muted">&copy; Created by Kelompok 4</p>
 </footer>
 
-<!-- Bootstrap JS (optional if needed) -->
 <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
-
 </body>
 </html>
-
