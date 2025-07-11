@@ -35,6 +35,7 @@
                         <th>Nama Aset</th>
                         <th>Saldo</th>
                         <th>Keterangan</th>
+                        <th>Aksi</th>
                     </tr>
                 </thead>
                 <tbody>
@@ -50,10 +51,14 @@
                                 <td>" . htmlspecialchars($row['nama_aset']) . "</td>
                                 <td>Rp " . number_format($row['saldo'], 0, ',', '.') . "</td>
                                 <td>" . htmlspecialchars($row['keterangan']) . "</td>
+                                <td>
+                                    <a href='EditAset.php?id_aset=" . $row['id_aset'] . "' class='btn btn-warning btn-sm'>Edit</a>
+                                    <a href='HapusAset.php?id_aset=" . $row['id_aset'] . "' class='btn btn-danger btn-sm' onclick=\"return confirm('Yakin mau hapus aset ini?');\">Hapus</a>
+                                </td>
                               </tr>";
                     }
                 } else {
-                    echo "<tr><td colspan='4' class='text-center'>Belum ada data aset.</td></tr>";
+                    echo "<tr><td colspan='5' class='text-center'>Belum ada data aset.</td></tr>";
                 }
                 ?>
                 </tbody>
