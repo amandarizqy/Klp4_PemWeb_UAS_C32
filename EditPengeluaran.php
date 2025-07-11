@@ -2,24 +2,41 @@
 include 'database.php';
 
 $id = $_GET['id'];
-$data = mysqli_query($conn, "SELECT * FROM pengeluaran WHERE id_pengeluaran = $id");
-$row = mysqli_fetch_assoc($data);
 
+// Ambil data pengeluaran sebelum diedit
+$data_lama = mysqli_query($conn, "SELECT * FROM pengeluaran WHERE id_pengeluaran = $id");
+$row = mysqli_fetch_assoc($data_lama);
+
+// Ambil pilihan aset & kategori
 $asets = mysqli_query($conn, "SELECT id_aset, nama_aset FROM aset");
 $kategori = mysqli_query($conn, "SELECT id_kategori, nama_kategori FROM kategori_pengeluaran");
 
 if ($_SERVER['REQUEST_METHOD'] == 'POST') {
   $tanggal = $_POST['tanggal'];
-  $id_aset = $_POST['id_aset'];
+  $id_aset_baru = $_POST['id_aset'];
   $id_kategori = $_POST['id_kategori'];
-  $jumlah = $_POST['jumlah'];
+  $jumlah_baru = $_POST['jumlah'];
   $keterangan = $_POST['keterangan'];
 
+  $id_aset_lama = $row['id_aset'];
+  $jumlah_lama = $row['jumlah'];
+
+  // 1. Kembalikan saldo lama
+  mysqli_query($conn, "UPDATE aset SET saldo = saldo + $jumlah_lama WHERE id_aset = $id_aset_lama");
+
+  // 2. Kurangi saldo baru
+  mysqli_query($conn, "UPDATE aset SET saldo = saldo - $jumlah_baru WHERE id_aset = $id_aset_baru");
+
+  // 3. Update data pengeluaran
   mysqli_query($conn, "UPDATE pengeluaran SET 
-    tanggal='$tanggal', id_aset='$id_aset', id_kategori='$id_kategori', jumlah='$jumlah', keterangan='$keterangan'
+    tanggal='$tanggal', 
+    id_aset='$id_aset_baru', 
+    id_kategori='$id_kategori', 
+    jumlah='$jumlah_baru', 
+    keterangan='$keterangan' 
     WHERE id_pengeluaran = $id");
 
-  echo "<script>alert('Pengeluaran diperbarui!'); window.location='Catatan.php';</script>";
+  echo "<script>alert('Pengeluaran berhasil diperbarui!'); window.location='Catatan.php';</script>";
 }
 ?>
 
