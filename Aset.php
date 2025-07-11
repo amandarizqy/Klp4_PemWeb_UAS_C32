@@ -1,4 +1,14 @@
-<?php include 'database.php'; ?>
+<?php
+include 'database.php';
+
+// Proses hapus aset
+if (isset($_POST['hapus_aset'])) {
+    $id = $_POST['hapus_aset'];
+    mysqli_query($conn, "DELETE FROM aset WHERE id_aset = '$id'");
+    echo "<script>alert('Aset berhasil dihapus!'); window.location='Aset.php';</script>";
+    exit;
+}
+?>
 <!DOCTYPE html>
 <html lang="id">
 <head>
@@ -70,7 +80,10 @@
                                     <td>" . htmlspecialchars($row['keterangan']) . "</td>
                                     <td>
                                         <a href='EditAset.php?id_aset=" . $row['id_aset'] . "' class='btn btn-warning btn-sm'>Edit</a>
-                                        <a href='HapusAset.php?id_aset=" . $row['id_aset'] . "' class='btn btn-danger btn-sm' onclick=\"return confirm('Yakin mau hapus aset ini?');\">Hapus</a>
+                                        <form method='POST' class='d-inline' onsubmit=\"return confirm('Yakin ingin menghapus aset ini?')\">
+                                            <input type='hidden' name='hapus_aset' value='" . $row['id_aset'] . "'>
+                                            <button type='submit' class='btn btn-danger btn-sm'>Hapus</button>
+                                        </form>
                                     </td>
                                   </tr>";
                         }

@@ -1,29 +1,50 @@
 <?php
 include 'database.php';
 
-// Proses hapus pendapatan
+$pesan = '';
+
+// Hapus Pendapatan (saldo aset dikurangi)
 if (isset($_POST['hapus_pendapatan'])) {
-    $id = $_POST['hapus_pendapatan'];
-    mysqli_query($conn, "DELETE FROM pendapatan WHERE id_pendapatan = '$id'");
+    $id = intval($_POST['hapus_pendapatan']);
+    $q = mysqli_query($conn, "SELECT id_aset, jumlah FROM pendapatan WHERE id_pendapatan = $id");
+    if ($row = mysqli_fetch_assoc($q)) {
+        mysqli_query($conn, "UPDATE aset SET saldo = saldo - {$row['jumlah']} WHERE id_aset = {$row['id_aset']}");
+    }
+    mysqli_query($conn, "DELETE FROM pendapatan WHERE id_pendapatan = $id");
+    header("Location: " . $_SERVER['PHP_SELF'] . "?bulan={$_GET['bulan']}&tahun={$_GET['tahun']}&pesan=sukses");
+    exit;
 }
 
-// Proses hapus pengeluaran
+// Hapus Pengeluaran (saldo aset ditambah)
 if (isset($_POST['hapus_pengeluaran'])) {
-    $id = $_POST['hapus_pengeluaran'];
-    mysqli_query($conn, "DELETE FROM pengeluaran WHERE id_pengeluaran = '$id'");
+    $id = intval($_POST['hapus_pengeluaran']);
+    $q = mysqli_query($conn, "SELECT id_aset, jumlah FROM pengeluaran WHERE id_pengeluaran = $id");
+    if ($row = mysqli_fetch_assoc($q)) {
+        mysqli_query($conn, "UPDATE aset SET saldo = saldo + {$row['jumlah']} WHERE id_aset = {$row['id_aset']}");
+    }
+    mysqli_query($conn, "DELETE FROM pengeluaran WHERE id_pengeluaran = $id");
+    header("Location: " . $_SERVER['PHP_SELF'] . "?bulan={$_GET['bulan']}&tahun={$_GET['tahun']}&pesan=sukses");
+    exit;
 }
 
-// Proses hapus transfer
+// Hapus Transfer (saldo aset dikembalikan)
 if (isset($_POST['hapus_transfer'])) {
-    $id = $_POST['hapus_transfer'];
-    mysqli_query($conn, "DELETE FROM transfer WHERE id_transfer = '$id'");
+    $id = intval($_POST['hapus_transfer']);
+    $q = mysqli_query($conn, "SELECT dari_aset, ke_aset, jumlah FROM transfer WHERE id_transfer = $id");
+    if ($row = mysqli_fetch_assoc($q)) {
+        mysqli_query($conn, "UPDATE aset SET saldo = saldo + {$row['jumlah']} WHERE id_aset = {$row['dari_aset']}");
+        mysqli_query($conn, "UPDATE aset SET saldo = saldo - {$row['jumlah']} WHERE id_aset = {$row['ke_aset']}");
+    }
+    mysqli_query($conn, "DELETE FROM transfer WHERE id_transfer = $id");
+    header("Location: " . $_SERVER['PHP_SELF'] . "?bulan={$_GET['bulan']}&tahun={$_GET['tahun']}&pesan=sukses");
+    exit;
 }
 
 // Ambil filter bulan dan tahun
 $bulan = isset($_GET['bulan']) ? $_GET['bulan'] : date('m');
 $tahun = isset($_GET['tahun']) ? $_GET['tahun'] : date('Y');
+$pesan = isset($_GET['pesan']) && $_GET['pesan'] === 'sukses' ? 'Data berhasil dihapus!' : '';
 ?>
-
 <!DOCTYPE html>
 <html lang="id">
 <head>
@@ -61,6 +82,13 @@ $tahun = isset($_GET['tahun']) ? $_GET['tahun'] : date('Y');
 
 <div class="container my-5">
     <h2 class="text-center mb-4">Ringkasan Keuangan</h2>
+
+    <?php if ($pesan): ?>
+        <div class="alert alert-success alert-dismissible fade show" role="alert">
+            <?= $pesan ?>
+            <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+        </div>
+    <?php endif; ?>
 
     <!-- FILTER -->
     <form method="GET" class="card p-4 shadow-sm mx-auto mb-4" style="max-width: 600px;">
@@ -199,5 +227,6 @@ $tahun = isset($_GET['tahun']) ? $_GET['tahun'] : date('Y');
     <p>&copy; Created by Kelompok 4</p>
 </footer>
 
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
 </body>
 </html>
