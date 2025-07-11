@@ -3,7 +3,7 @@ include 'database.php';
 
 $pesan = '';
 
-// Hapus Pendapatan (saldo aset dikurangi)
+// Hapus Pendapatan
 if (isset($_POST['hapus_pendapatan'])) {
     $id = intval($_POST['hapus_pendapatan']);
     $q = mysqli_query($conn, "SELECT id_aset, jumlah FROM pendapatan WHERE id_pendapatan = $id");
@@ -15,7 +15,7 @@ if (isset($_POST['hapus_pendapatan'])) {
     exit;
 }
 
-// Hapus Pengeluaran (saldo aset ditambah)
+// Hapus Pengeluaran
 if (isset($_POST['hapus_pengeluaran'])) {
     $id = intval($_POST['hapus_pengeluaran']);
     $q = mysqli_query($conn, "SELECT id_aset, jumlah FROM pengeluaran WHERE id_pengeluaran = $id");
@@ -27,7 +27,7 @@ if (isset($_POST['hapus_pengeluaran'])) {
     exit;
 }
 
-// Hapus Transfer (saldo aset dikembalikan)
+// Hapus Transfer
 if (isset($_POST['hapus_transfer'])) {
     $id = intval($_POST['hapus_transfer']);
     $q = mysqli_query($conn, "SELECT dari_aset, ke_aset, jumlah FROM transfer WHERE id_transfer = $id");
@@ -40,7 +40,7 @@ if (isset($_POST['hapus_transfer'])) {
     exit;
 }
 
-// Ambil filter bulan dan tahun
+// Filter
 $bulan = isset($_GET['bulan']) ? $_GET['bulan'] : date('m');
 $tahun = isset($_GET['tahun']) ? $_GET['tahun'] : date('Y');
 $pesan = isset($_GET['pesan']) && $_GET['pesan'] === 'sukses' ? 'Data berhasil dihapus!' : '';
@@ -52,15 +52,8 @@ $pesan = isset($_GET['pesan']) && $_GET['pesan'] === 'sukses' ? 'Data berhasil d
     <title>Catatan Keuangan</title>
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet">
     <style>
-        .nav-link.active {
-            font-weight: bold;
-            color: #0d6efd !important;
-        }
-        footer {
-            margin-top: 50px;
-            text-align: center;
-            color: #888;
-        }
+        .nav-link.active { font-weight: bold; color: #0d6efd !important; }
+        footer { margin-top: 50px; text-align: center; color: #888; }
     </style>
 </head>
 <body class="bg-light">
@@ -121,18 +114,23 @@ $pesan = isset($_GET['pesan']) && $_GET['pesan'] === 'sukses' ? 'Data berhasil d
                 <tr>
                     <th>Tanggal</th>
                     <th>Keterangan</th>
+                    <th>Kategori</th>
                     <th>Jumlah</th>
                     <th>Aksi</th>
                 </tr>
             </thead>
             <tbody>
                 <?php
-                $qPendapatan = mysqli_query($conn, "SELECT id_pendapatan, tanggal, keterangan, jumlah FROM pendapatan 
-                    WHERE MONTH(tanggal) = '$bulan' AND YEAR(tanggal) = '$tahun'");
+                $qPendapatan = mysqli_query($conn, "
+                    SELECT p.id_pendapatan, p.tanggal, p.keterangan, p.jumlah, k.nama_kategori 
+                    FROM pendapatan p
+                    JOIN kategori_pendapatan k ON p.id_kategori = k.id_kategori
+                    WHERE MONTH(p.tanggal) = '$bulan' AND YEAR(p.tanggal) = '$tahun'");
                 while ($row = mysqli_fetch_assoc($qPendapatan)): ?>
                     <tr>
                         <td><?= $row['tanggal'] ?></td>
                         <td><?= htmlspecialchars($row['keterangan']) ?></td>
+                        <td><?= htmlspecialchars($row['nama_kategori']) ?></td>
                         <td>Rp<?= number_format($row['jumlah'], 0, ',', '.') ?></td>
                         <td>
                             <a href="EditPendapatan.php?id=<?= $row['id_pendapatan'] ?>" class="btn btn-sm btn-warning">Edit</a>
@@ -155,18 +153,23 @@ $pesan = isset($_GET['pesan']) && $_GET['pesan'] === 'sukses' ? 'Data berhasil d
                 <tr>
                     <th>Tanggal</th>
                     <th>Keterangan</th>
+                    <th>Kategori</th>
                     <th>Jumlah</th>
                     <th>Aksi</th>
                 </tr>
             </thead>
             <tbody>
                 <?php
-                $qPengeluaran = mysqli_query($conn, "SELECT id_pengeluaran, tanggal, keterangan, jumlah FROM pengeluaran
-                    WHERE MONTH(tanggal) = '$bulan' AND YEAR(tanggal) = '$tahun'");
+                $qPengeluaran = mysqli_query($conn, "
+                    SELECT p.id_pengeluaran, p.tanggal, p.keterangan, p.jumlah, k.nama_kategori 
+                    FROM pengeluaran p
+                    JOIN kategori_pengeluaran k ON p.id_kategori = k.id_kategori
+                    WHERE MONTH(p.tanggal) = '$bulan' AND YEAR(p.tanggal) = '$tahun'");
                 while ($row = mysqli_fetch_assoc($qPengeluaran)): ?>
                     <tr>
                         <td><?= $row['tanggal'] ?></td>
                         <td><?= htmlspecialchars($row['keterangan']) ?></td>
+                        <td><?= htmlspecialchars($row['nama_kategori']) ?></td>
                         <td>Rp<?= number_format($row['jumlah'], 0, ',', '.') ?></td>
                         <td>
                             <a href="EditPengeluaran.php?id=<?= $row['id_pengeluaran'] ?>" class="btn btn-sm btn-warning">Edit</a>
@@ -197,7 +200,8 @@ $pesan = isset($_GET['pesan']) && $_GET['pesan'] === 'sukses' ? 'Data berhasil d
             </thead>
             <tbody>
                 <?php
-                $qTransfer = mysqli_query($conn, "SELECT t.id_transfer, t.tanggal, a1.nama_aset AS dari, a2.nama_aset AS ke, t.jumlah, t.keterangan 
+                $qTransfer = mysqli_query($conn, "
+                    SELECT t.id_transfer, t.tanggal, a1.nama_aset AS dari, a2.nama_aset AS ke, t.jumlah, t.keterangan 
                     FROM transfer t 
                     JOIN aset a1 ON t.dari_aset = a1.id_aset 
                     JOIN aset a2 ON t.ke_aset = a2.id_aset

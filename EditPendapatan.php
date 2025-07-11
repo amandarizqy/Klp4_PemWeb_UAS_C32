@@ -47,31 +47,84 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
 <!DOCTYPE html>
 <html>
 <head>
-  <title>Edit Pendapatan</title>
-  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet">
+    <title>Edit Pendapatan</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet">
+    <style>
+        body {
+            background-color: #f8f9fa;
+        }
+
+        h2 {
+            margin-bottom: 30px;
+            color: #343a40;
+        }
+
+        form {
+            background-color: #ffffff;
+            padding: 25px;
+            border-radius: 10px;
+            box-shadow: 0px 0px 10px rgba(0,0,0,0.1);
+            max-width: 500px;
+            margin: auto;
+        }
+
+        form input[type="date"],
+        form input[type="number"],
+        form select,
+        form textarea {
+            width: 100%;
+            padding: 10px;
+            margin-bottom: 15px;
+            border: 1px solid #ced4da;
+            border-radius: 5px;
+        }
+
+        form button {
+            width: 100%;
+            padding: 10px;
+            background-color: #0d6efd;
+            color: white;
+            border: none;
+            border-radius: 5px;
+            font-weight: bold;
+        }
+
+        form button:hover {
+            background-color: #0b5ed7;
+        }
+    </style>
 </head>
 <body class="container py-5">
-  <h2>Edit Pendapatan</h2>
-  <!-- Form Edit (singkat saja, bisa kamu lengkapi sendiri) -->
-<form method="POST">
-    <input type="date" name="tanggal" value="<?= $data['tanggal'] ?>" required><br>
-    <select name="aset">
-        <?php while ($a = mysqli_fetch_assoc($asets)): ?>
-        <option value="<?= $a['id_aset'] ?>" <?= $a['id_aset'] == $data['id_aset'] ? 'selected' : '' ?>>
-            <?= $a['nama_aset'] ?>
-        </option>
-        <?php endwhile; ?>
-    </select><br>
-    <select name="kategori">
-        <?php while ($k = mysqli_fetch_assoc($kategori)): ?>
-        <option value="<?= $k['id_kategori'] ?>" <?= $k['id_kategori'] == $data['id_kategori'] ? 'selected' : '' ?>>
-            <?= $k['nama_kategori'] ?>
-        </option>
-        <?php endwhile; ?>
-    </select><br>
-    <input type="number" name="jumlah" value="<?= $data['jumlah'] ?>" required><br>
-    <textarea name="keterangan"><?= $data['keterangan'] ?></textarea><br>
-    <button type="submit">Simpan</button>
-</form>
+    <h2 class="text-center">Edit Pendapatan</h2>
+    <form method="POST">
+        <label for="tanggal">Tanggal</label>
+        <input type="date" name="tanggal" value="<?= $data['tanggal'] ?>" required>
+
+        <label for="aset">Aset</label>
+        <select name="aset" required>
+            <?php while ($a = mysqli_fetch_assoc($asets)): ?>
+            <option value="<?= $a['id_aset'] ?>" <?= $a['id_aset'] == $data['id_aset'] ? 'selected' : '' ?>>
+                <?= $a['nama_aset'] ?>
+            </option>
+            <?php endwhile; ?>
+        </select>
+
+        <label for="kategori">Kategori</label>
+        <select name="kategori" required>
+            <?php while ($k = mysqli_fetch_assoc($kategori)): ?>
+            <option value="<?= $k['id_kategori'] ?>" <?= $k['id_kategori'] == $data['id_kategori'] ? 'selected' : '' ?>>
+                <?= $k['nama_kategori'] ?>
+            </option>
+            <?php endwhile; ?>
+        </select>
+
+        <label for="jumlah">Jumlah</label>
+        <input type="number" name="jumlah" value="<?= $data['jumlah'] ?>" required>
+
+        <label for="keterangan">Keterangan</label>
+        <textarea name="keterangan" rows="3"><?= $data['keterangan'] ?></textarea>
+
+        <button type="submit">Simpan</button>
+    </form>
 </body>
 </html>
