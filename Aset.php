@@ -41,81 +41,46 @@
         <a href="TambahAset.php" class="btn btn-primary">+ Tambah Aset</a>
     </div>
 
-<<<<<<< HEAD
-        <div class="table-responsive">
-            <table class="table table-bordered table-striped">
-                <thead class="table-dark">
-                    <tr>
-                        <th>No</th>
-                        <th>Nama Aset</th>
-                        <th>Saldo</th>
-                        <th>Keterangan</th>
-                        <th>Aksi</th>
-                    </tr>
-                </thead>
-                <tbody>
-                <?php
-                $query = "SELECT * FROM aset";
-                $result = mysqli_query($conn, $query);
-                $no = 1;
-
-                if (mysqli_num_rows($result) > 0) {
-                    while ($row = mysqli_fetch_assoc($result)) {
-                        echo "<tr>
-                                <td>" . $no++ . "</td>
-                                <td>" . htmlspecialchars($row['nama_aset']) . "</td>
-                                <td>Rp " . number_format($row['saldo'], 0, ',', '.') . "</td>
-                                <td>" . htmlspecialchars($row['keterangan']) . "</td>
-                                <td>
-                                    <a href='EditAset.php?id_aset=" . $row['id_aset'] . "' class='btn btn-warning btn-sm'>Edit</a>
-                                    <a href='HapusAset.php?id_aset=" . $row['id_aset'] . "' class='btn btn-danger btn-sm' onclick=\"return confirm('Yakin mau hapus aset ini?');\">Hapus</a>
-                                </td>
-                              </tr>";
-                    }
-                } else {
-                    echo "<tr><td colspan='5' class='text-center'>Belum ada data aset.</td></tr>";
-                }
-                ?>
-                </tbody>
-            </table>
-=======
     <div class="row">
         <!-- TABEL -->
-        <div class="col-lg-8 mb-4">
-            <div class="table-responsive shadow-sm bg-white p-3 rounded">
-                <table class="table table-striped table-bordered">
+        <div class="col-lg-8">
+            <div class="table-responsive">
+                <table class="table table-bordered table-striped">
                     <thead class="table-dark">
                         <tr>
                             <th>No</th>
                             <th>Nama Aset</th>
                             <th>Saldo</th>
                             <th>Keterangan</th>
+                            <th>Aksi</th>
                         </tr>
                     </thead>
                     <tbody>
-                        <?php
-                        $query = "SELECT * FROM aset";
-                        $result = mysqli_query($conn, $query);
-                        $no = 1;
+                    <?php
+                    $query = "SELECT * FROM aset";
+                    $result = mysqli_query($conn, $query);
+                    $no = 1;
 
-                        if (mysqli_num_rows($result) > 0) {
-                            while ($row = mysqli_fetch_assoc($result)) {
-                                echo "<tr>
-                                    <td>{$no}</td>
+                    if (mysqli_num_rows($result) > 0) {
+                        while ($row = mysqli_fetch_assoc($result)) {
+                            echo "<tr>
+                                    <td>" . $no++ . "</td>
                                     <td>" . htmlspecialchars($row['nama_aset']) . "</td>
                                     <td>Rp " . number_format($row['saldo'], 0, ',', '.') . "</td>
                                     <td>" . htmlspecialchars($row['keterangan']) . "</td>
-                                </tr>";
-                                $no++;
-                            }
-                        } else {
-                            echo "<tr><td colspan='4' class='text-center'>Belum ada data aset.</td></tr>";
+                                    <td>
+                                        <a href='EditAset.php?id_aset=" . $row['id_aset'] . "' class='btn btn-warning btn-sm'>Edit</a>
+                                        <a href='HapusAset.php?id_aset=" . $row['id_aset'] . "' class='btn btn-danger btn-sm' onclick=\"return confirm('Yakin mau hapus aset ini?');\">Hapus</a>
+                                    </td>
+                                  </tr>";
                         }
-                        ?>
+                    } else {
+                        echo "<tr><td colspan='5' class='text-center'>Belum ada data aset.</td></tr>";
+                    }
+                    ?>
                     </tbody>
                 </table>
             </div>
->>>>>>> ead672d7b522bcc838608d3f6e6f5850a5271777
         </div>
 
         <!-- SIDEBAR -->
