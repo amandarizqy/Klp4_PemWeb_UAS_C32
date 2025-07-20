@@ -1,21 +1,26 @@
 <?php include 'database.php'; ?>
+
+<?php
+// Cek apakah tabel aset dan kategori sudah memiliki data
+$cek_aset = mysqli_num_rows(mysqli_query($conn, "SELECT * FROM aset"));
+$cek_kat_pendapatan = mysqli_num_rows(mysqli_query($conn, "SELECT * FROM kategori_pendapatan"));
+$cek_kat_pengeluaran = mysqli_num_rows(mysqli_query($conn, "SELECT * FROM kategori_pengeluaran"));
+
+$siap_pendapatan = $cek_aset > 0 && $cek_kat_pendapatan > 0;
+$siap_pengeluaran = $cek_aset > 0 && $cek_kat_pengeluaran > 0;
+$siap_transfer = $cek_aset > 1; // karena transfer perlu minimal 2 aset
+?>
+
 <!DOCTYPE html>
 <html lang="id">
 <head>
     <meta charset="UTF-8">
     <title>Tambah Transaksi</title>
-
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet">
     <style>
         .nav-link.active {
             font-weight: bold;
             color: #0d6efd !important;
-        }
-        .btn-group-custom {
-            display: flex;
-            justify-content: center;
-            gap: 20px;
-            margin-top: 50px;
         }
         footer {
             margin-top: 100px;
@@ -39,17 +44,29 @@
     </div>
 </nav>
 
+<!-- ALERT -->
+<div class="container mt-4">
+    <?php if (!$siap_pendapatan): ?>
+        <div class="alert alert-warning">Silakan isi <strong>Aset</strong> dan <strong>Kategori Pendapatan</strong> terlebih dahulu sebelum menambahkan Pendapatan.</div>
+    <?php endif; ?>
+    <?php if (!$siap_pengeluaran): ?>
+        <div class="alert alert-warning">Silakan isi <strong>Aset</strong> dan <strong>Kategori Pengeluaran</strong> terlebih dahulu sebelum menambahkan Pengeluaran.</div>
+    <?php endif; ?>
+    <?php if (!$siap_transfer): ?>
+        <div class="alert alert-warning">Silakan isi minimal <strong>2 Aset</strong> terlebih dahulu sebelum melakukan Transfer.</div>
+    <?php endif; ?>
+</div>
+
 <!-- BUTTON -->
 <div class="container my-5 text-center">
     <h2 class="mb-4">Tambah Transaksi</h2>
 
     <div class="d-grid gap-3 mx-auto" style="max-width: 300px;">
-        <a href="Pendapatan.php" class="btn btn-success btn-lg py-3">Pendapatan</a>
-        <a href="Pengeluaran.php" class="btn btn-danger btn-lg py-3">Pengeluaran</a>
-        <a href="Transfer.php" class="btn btn-warning btn-lg py-3 text-white">Transfer</a>
+        <a href="<?= $siap_pendapatan ? 'Pendapatan.php' : '#' ?>" class="btn btn-success btn-lg py-3 <?= !$siap_pendapatan ? 'disabled' : '' ?>">Pendapatan</a>
+        <a href="<?= $siap_pengeluaran ? 'Pengeluaran.php' : '#' ?>" class="btn btn-danger btn-lg py-3 <?= !$siap_pengeluaran ? 'disabled' : '' ?>">Pengeluaran</a>
+        <a href="<?= $siap_transfer ? 'Transfer.php' : '#' ?>" class="btn btn-warning btn-lg py-3 text-white <?= !$siap_transfer ? 'disabled' : '' ?>">Transfer</a>
     </div>
 </div>
-
 
 <!-- FOOTER -->
 <footer class="bg-white text-center py-3 shadow-sm">
