@@ -84,10 +84,11 @@ $pesan = isset($_GET['pesan']) && $_GET['pesan'] === 'sukses' ? 'Data berhasil d
     <?php endif; ?>
 
     <!-- FILTER -->
-    <form method="GET" class="card p-4 shadow-sm mx-auto mb-4" style="max-width: 600px;">
-        <div class="mb-3">
-            <label for="bulan" class="form-label">Bulan:</label>
-            <select name="bulan" id="bulan" class="form-select">
+    <form method="GET" class="card p-2 shadow-sm mx-auto mb-3" style="max-width: 400px;">
+    <div class="row mb-2">
+        <div class="col">
+            <label for="bulan" class="form-label mb-1 small">Bulan:</label>
+            <select name="bulan" id="bulan" class="form-select form-select-sm">
                 <?php for ($i = 1; $i <= 12; $i++): ?>
                     <option value="<?= str_pad($i, 2, '0', STR_PAD_LEFT) ?>" <?= ($i == $bulan) ? 'selected' : '' ?>>
                         <?= date('F', mktime(0, 0, 0, $i, 1)) ?>
@@ -95,16 +96,19 @@ $pesan = isset($_GET['pesan']) && $_GET['pesan'] === 'sukses' ? 'Data berhasil d
                 <?php endfor; ?>
             </select>
         </div>
-        <div class="mb-3">
-            <label for="tahun" class="form-label">Tahun:</label>
-            <select name="tahun" id="tahun" class="form-select">
+        <div class="col">
+            <label for="tahun" class="form-label mb-1 small">Tahun:</label>
+            <select name="tahun" id="tahun" class="form-select form-select-sm">
                 <?php for ($y = 2022; $y <= date('Y'); $y++): ?>
                     <option value="<?= $y ?>" <?= ($y == $tahun) ? 'selected' : '' ?>><?= $y ?></option>
                 <?php endfor; ?>
             </select>
         </div>
-        <button type="submit" class="btn btn-primary w-100">Filter</button>
+    </div>
+    <button type="submit" class="btn btn-primary btn-sm w-100">Filter</button>
     </form>
+
+
 
     <!-- PENDAPATAN -->
     <h4 class="mt-4">Pendapatan</h4>
