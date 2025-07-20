@@ -43,50 +43,42 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
     </div>
 </nav>
 
-<!-- HEADER -->
-<header class="bg-info text-white text-center py-4 mb-4">
-    <h2>Form Tambah Aset</h2>
-</header>
-
 <!-- FORM -->
-<div class="container">
-    <div class="card shadow-sm mx-auto" style="max-width: 600px;">
-        <div class="card-body">
-            <?php if ($success): ?>
-                <div class="alert alert-success"><?= $success ?> <a href="Aset.php" class="alert-link">Lihat Aset</a></div>
-            <?php elseif ($error): ?>
-                <div class="alert alert-danger"><?= $error ?></div>
-            <?php endif; ?>
+<div class="container py-4">
+    <div class="card shadow-sm mx-auto p-4" style="max-width: 1000px;">
+        <h4 class="mb-3 text-center">Tambah Aset</h4>
 
-            <form method="POST" action="">
-                <div class="mb-3">
+        <?php if ($success): ?>
+            <div class="alert alert-success"><?= $success ?> <a href="Aset.php" class="alert-link">Lihat Aset</a></div>
+        <?php elseif ($error): ?>
+            <div class="alert alert-danger"><?= $error ?></div>
+        <?php endif; ?>
+
+        <form method="POST" action="">
+            <div class="row g-3 align-items-end">
+                <div class="col-md-4">
                     <label for="namaAset" class="form-label">Nama Aset</label>
-                    <input type="text" class="form-control" id="namaAset" name="nama_aset" placeholder="Contoh: Dompet, Rekening" required>
+                    <input type="text" class="form-control" id="namaAset" name="nama_aset" placeholder="Contoh: Dompet" required>
                 </div>
-
-                <div class="mb-3">
+                <div class="col-md-4">
                     <label for="saldoAset" class="form-label">Saldo Awal (Rp)</label>
                     <input type="number" class="form-control" id="saldoAset" name="saldo" placeholder="Contoh: 1000000" required>
                 </div>
-
-                <div class="mb-3">
+                <div class="col-md-4">
                     <label for="keterangan" class="form-label">Keterangan</label>
-                    <textarea class="form-control" id="keterangan" name="keterangan" rows="3" placeholder="Contoh: Uang tunai di dompet, rekening utama, dll"></textarea>
+                    <input type="text" class="form-control" id="keterangan" name="keterangan" placeholder="Contoh: Dompet utama">
                 </div>
+            </div>
 
-                <div class="d-flex justify-content-between">
-                    <a href="Aset.php" class="btn btn-secondary">Kembali</a>
-                    <button type="submit" class="btn btn-info text-white">Simpan Aset</button>
-                </div>
-            </form>
-        </div>
+            <div class="d-flex justify-content-between mt-4">
+                <a href="Aset.php" class="btn btn-secondary">Kembali</a>
+                <button type="submit" class="btn btn-info text-white">Simpan Aset</button>
+            </div>
+        </form>
     </div>
 </div>
 
-<!-- FOOTER -->
-<footer class="bg-info text-white text-center py-3 mt-5">
-    <p>&copy; Created by Kelompok 4</p>
-</footer>
+
 
 <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
 </body>

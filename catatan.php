@@ -73,7 +73,7 @@ $pesan = isset($_GET['pesan']) && $_GET['pesan'] === 'sukses' ? 'Data berhasil d
     </div>
 </nav>
 
-<div class="container my-5">
+<div class="container my-3">
     <h2 class="text-center mb-4">Ringkasan Keuangan</h2>
 
     <?php if ($pesan): ?>
@@ -84,10 +84,10 @@ $pesan = isset($_GET['pesan']) && $_GET['pesan'] === 'sukses' ? 'Data berhasil d
     <?php endif; ?>
 
     <!-- FILTER -->
-    <form method="GET" class="card p-2 shadow-sm mx-auto mb-3" style="max-width: 400px;">
-    <div class="row mb-2">
-        <div class="col">
-            <label for="bulan" class="form-label mb-1 small">Bulan:</label>
+    <form method="GET" class="card p-2 shadow-sm mx-auto mb-3" style="max-width: 500px;">
+    <div class="row g-2 align-items-end">
+        <div class="col-4">
+            <label for="bulan" class="form-label small mb-1">Bulan:</label>
             <select name="bulan" id="bulan" class="form-select form-select-sm">
                 <?php for ($i = 1; $i <= 12; $i++): ?>
                     <option value="<?= str_pad($i, 2, '0', STR_PAD_LEFT) ?>" <?= ($i == $bulan) ? 'selected' : '' ?>>
@@ -96,22 +96,26 @@ $pesan = isset($_GET['pesan']) && $_GET['pesan'] === 'sukses' ? 'Data berhasil d
                 <?php endfor; ?>
             </select>
         </div>
-        <div class="col">
-            <label for="tahun" class="form-label mb-1 small">Tahun:</label>
+        <div class="col-4">
+            <label for="tahun" class="form-label small mb-1">Tahun:</label>
             <select name="tahun" id="tahun" class="form-select form-select-sm">
                 <?php for ($y = 2022; $y <= date('Y'); $y++): ?>
                     <option value="<?= $y ?>" <?= ($y == $tahun) ? 'selected' : '' ?>><?= $y ?></option>
                 <?php endfor; ?>
             </select>
         </div>
+        <div class="col-4">
+            <label class="form-label small mb-1 invisible">Filter</label>
+            <button type="submit" class="btn btn-primary btn-sm w-100">Filter</button>
+        </div>
     </div>
-    <button type="submit" class="btn btn-primary btn-sm w-100">Filter</button>
     </form>
 
 
 
+
     <!-- PENDAPATAN -->
-    <h4 class="mt-4">Pendapatan</h4>
+    <h4 class="mt-2">Pendapatan</h4>
     <div class="table-responsive">
         <table class="table table-bordered bg-white shadow-sm">
             <thead class="table-dark">
@@ -150,7 +154,7 @@ $pesan = isset($_GET['pesan']) && $_GET['pesan'] === 'sukses' ? 'Data berhasil d
     </div>
 
     <!-- PENGELUARAN -->
-    <h4 class="mt-4">Pengeluaran</h4>
+    <h4 class="mt-2">Pengeluaran</h4>
     <div class="table-responsive">
         <table class="table table-bordered bg-white shadow-sm">
             <thead class="table-dark">
@@ -189,7 +193,7 @@ $pesan = isset($_GET['pesan']) && $_GET['pesan'] === 'sukses' ? 'Data berhasil d
     </div>
 
     <!-- TRANSFER -->
-    <h4 class="mt-4">Transfer</h4>
+    <h4 class="mt-2">Transfer</h4>
     <div class="table-responsive">
         <table class="table table-bordered bg-white shadow-sm">
             <thead class="table-dark">

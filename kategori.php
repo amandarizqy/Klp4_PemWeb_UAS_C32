@@ -89,59 +89,72 @@ while ($row = mysqli_fetch_assoc($q2)) {
     </nav>
 
     <!-- Form Tambah Kategori -->
-    <div class="container my-5">
-        <h2 class="text-center mb-4">Tambah Kategori</h2>
-        <form method="POST" action="Kategori.php" class="card p-4 shadow-sm mx-auto" style="max-width: 500px;">
-            <div class="mb-3">
-                <label for="nama_kategori" class="form-label">Nama Kategori</label>
-                <input type="text" name="nama_kategori" id="nama_kategori" class="form-control" required>
+    <div class="container my-3">
+        <h2 class="text-center mb-3">Tambah Kategori</h2>
+        <form method="POST" action="Kategori.php" class="card p-3 shadow-sm mx-auto" style="max-width: 700px;">
+            <div class="row g-2 align-items-end">
+                <div class="col-md-5">
+                    <label for="nama_kategori" class="form-label small mb-1">Nama Kategori</label>
+                    <input type="text" name="nama_kategori" id="nama_kategori" class="form-control form-control-sm" required>
+                </div>
+                <div class="col-md-4">
+                    <label for="jenis" class="form-label small mb-1">Jenis</label>
+                    <select name="jenis" id="jenis" class="form-select form-select-sm" required>
+                        <option value="Pendapatan">Pendapatan</option>
+                        <option value="Pengeluaran">Pengeluaran</option>
+                    </select>
+                </div>
+                <div class="col-md-3">
+                    <label class="form-label small mb-1 invisible">Tambah</label>
+                    <button type="submit" class="btn btn-primary btn-sm w-100">Tambah Kategori</button>
+                </div>
             </div>
-            <div class="mb-3">
-                <label for="jenis" class="form-label">Jenis</label>
-                <select name="jenis" id="jenis" class="form-select" required>
-                    <option value="Pendapatan">Pendapatan</option>
-                    <option value="Pengeluaran">Pengeluaran</option>
-                </select>
-            </div>
-            <button type="submit" class="btn btn-primary w-100">Tambah Kategori</button>
         </form>
+    </div>
+
 
         <!-- Tabel Data -->
-        <h3 class="text-center mt-5 mb-3">Data Kategori</h3>
-        <div class="table-responsive">
-            <table class="table table-bordered table-striped shadow-sm bg-white">
-                <thead class="table-dark">
-                    <tr>
-                        <th>No</th>
-                        <th>Nama Kategori</th>
-                        <th>Jenis</th>
-                        <th>Aksi</th>
-                    </tr>
-                </thead>
-                <tbody>
-                    <?php
-                    $no = 1;
-                    foreach ($data as $row) {
-                        $id = $row['id_kategori'];
-                        $nama = htmlspecialchars($row['nama_kategori']);
-                        $jenis = $row['jenis'];
-                        $badge = ($jenis === 'Pendapatan') ? 'success' : 'danger';
-                        echo "<tr>
-                            <td>{$no}</td>
-                            <td>{$nama}</td>
-                            <td><span class='badge bg-{$badge}'>{$jenis}</span></td>
-                            <td>
-                                <a href='EditKategori.php?id_kategori={$id}&jenis={$jenis}' class='btn btn-sm btn-warning me-1'>Edit</a>
-                                <a href='Kategori.php?hapus=true&id_kategori={$id}&jenis={$jenis}' class='btn btn-sm btn-danger' onclick=\"return confirm('Yakin ingin menghapus?')\">Hapus</a>
-                            </td>
-                        </tr>";
-                        $no++;
-                    }
-                    ?>
-                </tbody>
-            </table>
+        <div class="container my-4">  <!-- <- container memberi padding horiz -->
+            <h3 class="text-center mb-3">Data Kategori</h3>
+
+            <div class="table-responsive px-2 px-md-4"> <!-- extra padding jika perlu -->
+                <table class="table table-bordered table-striped shadow-sm bg-white">
+                    <thead class="table-dark">
+                        <tr>
+                            <th>No</th>
+                            <th>Nama Kategori</th>
+                            <th>Jenis</th>
+                            <th>Aksi</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <?php
+                        $no = 1;
+                        foreach ($data as $row) {
+                            $id    = $row['id_kategori'];
+                            $nama  = htmlspecialchars($row['nama_kategori']);
+                            $jenis = $row['jenis'];
+                            $badge = ($jenis === 'Pendapatan') ? 'success' : 'danger';
+                            echo "<tr>
+                                    <td>{$no}</td>
+                                    <td>{$nama}</td>
+                                    <td><span class='badge bg-{$badge}'>{$jenis}</span></td>
+                                    <td>
+                                        <a href='EditKategori.php?id_kategori={$id}&jenis={$jenis}' class='btn btn-sm btn-warning me-1'>Edit</a>
+                                        <a href='Kategori.php?hapus=true&id_kategori={$id}&jenis={$jenis}' class='btn btn-sm btn-danger' onclick=\"return confirm('Yakin ingin menghapus?')\">Hapus</a>
+                                    </td>
+                                </tr>";
+                            $no++;
+                        }
+                        ?>
+                    </tbody>
+                </table>
+            </div>
         </div>
-    </div>
+
+        <footer class="mt-5 mb-3 text-center">
+            <p>&copy; Created by Kelompok 4</p>
+        </footer>
 
 </body>
 </html>
