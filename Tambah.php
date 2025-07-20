@@ -44,16 +44,31 @@ $siap_transfer = $cek_aset > 1; // karena transfer perlu minimal 2 aset
     </div>
 </nav>
 
-<!-- ALERT -->
+<!-- ALERT + TOMBOL -->
 <div class="container mt-4">
     <?php if (!$siap_pendapatan): ?>
-        <div class="alert alert-warning">Silakan isi <strong>Aset</strong> dan <strong>Kategori Pendapatan</strong> terlebih dahulu sebelum menambahkan Pendapatan.</div>
+        <div class="alert alert-warning">
+            Silakan isi <strong>Aset</strong> dan <strong>Kategori Pendapatan</strong> terlebih dahulu sebelum menambahkan Pendapatan.
+        </div>
     <?php endif; ?>
+
     <?php if (!$siap_pengeluaran): ?>
-        <div class="alert alert-warning">Silakan isi <strong>Aset</strong> dan <strong>Kategori Pengeluaran</strong> terlebih dahulu sebelum menambahkan Pengeluaran.</div>
+        <div class="alert alert-warning">
+            Silakan isi <strong>Aset</strong> dan <strong>Kategori Pengeluaran</strong> terlebih dahulu sebelum menambahkan Pengeluaran.
+        </div>
     <?php endif; ?>
+
     <?php if (!$siap_transfer): ?>
-        <div class="alert alert-warning">Silakan isi minimal <strong>2 Aset</strong> terlebih dahulu sebelum melakukan Transfer.</div>
+        <div class="alert alert-warning">
+            Silakan isi minimal <strong>2 Aset</strong> terlebih dahulu sebelum melakukan Transfer.
+        </div>
+    <?php endif; ?>
+
+    <?php if (!$siap_pendapatan || !$siap_pengeluaran || !$siap_transfer): ?>
+        <div class="d-flex gap-3 mt-3">
+            <a href="TambahAset.php" class="btn btn-primary">+ Tambah Aset</a>
+            <a href="Kategori.php" class="btn btn-secondary">Kelola Kategori</a>
+        </div>
     <?php endif; ?>
 </div>
 
